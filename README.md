@@ -1,20 +1,20 @@
 # 🚀 OpenAdapter
 
-**Effortless Deployment and Integration for Advanced UI Action Models**
+**Effortless Deployment and Integration for State-of-the-Art Screenshot Parsing and Action Models**
 
-OpenAdapter is a deployment tool designed for model builders and users who need efficient, high-performance deployment of state-of-the-art screenshot parsing models. With OpenAdapter, you can quickly and easily set up these models on trusted hardware that you control, enabling automation with action and screenshot data on local or securely managed systems.
+OpenAdapter is a deployment tool designed for model builders and users who need efficient, high-performance deployment of advanced screenshot parsing and action models. With OpenAdapter, you can quickly and easily set up these models on trusted hardware that you control, enabling automation with action and screenshot data on local or securely managed systems.
 
 This repository supports multiple cloud backends—initially with AWS, Hugging Face Inference API, and compatibility with frontier model APIs (e.g., Anthropic, OpenAI)—making it ideal for flexible, scalable deployment in diverse automation use cases and [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt)-agnostic implementations.
 
 ## ✨ Features
-- **Automated Cloud Deployment**: Rapidly deploy models on AWS EC2, Hugging Face Inference API, or connect with Anthropic/OpenAI APIs for remote inference.
+- **Automated Cloud Deployment**: Rapidly deploy models on AWS EC2, Hugging Face Inference API, or connect with Anthropic/OpenAI APIs (with integrating PII/PHI scrubbing) for remote inference.
 - **Configurable via `.env`**: Simplify setup with a customizable environment file.
 - **Cost-Efficient**: Deploy high-performance instances on demand; easily pause or stop resources to minimize costs.
 - **Compatibility with Dockerized Models or Frontier Model APIs**: OpenAdapter supports models like OmniParser and Set-of-Mark (SoM) as examples. It's designed to plug into any project with a Dockerfile and can even autogenerate one if necessary. It also enables seamless integration with non-containerized APIs like Anthropic's and OpenAI's.
 
 Additional pattern references:
-- [OmniParser PR #52](https://github.com/microsoft/OmniParser/pull/52)
 - [SoM PR #19](https://github.com/microsoft/SoM/pull/19)
+- [OmniParser PR #52](https://github.com/microsoft/OmniParser/pull/52)
 
 ## ⚙️ Setup
 
@@ -157,15 +157,14 @@ Planned backends include:
 OpenAdapter is intended for OpenAdapt-agnostic deployments but also serves as a complementary tool for the [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt) generative process automation project. It can be customized to suit various automation, data processing, or model inference applications beyond OpenAdapt, providing a standalone, scalable solution for deploying state-of-the-art models.
 
 ## 🛠️ Roadmap
-- **Automation with AWS CDK**: Integrate AWS Cloud Development Kit (CDK) for Infrastructure as Code, simplifying deployment workflows and enabling reproducible environments with minimal setup.
+- **Automation with AWS CDK**: Integrate AWS Cloud Development Kit (CDK) for Infrastructure as Code, enabling simplified, reproducible deployments with clear structure, dependency handling, and streamlined resource management.
 - **Containerized Deployments with ECS and ECR**: Use Amazon Elastic Container Service (ECS) and Elastic Container Registry (ECR) for scalable model deployment and automated container management.
-- **Multi-Cloud Support**: Expand backend support to include Google Cloud Platform (GCP) and Microsoft Azure for more deployment options.
 - **GPU Resource Optimization**: Incorporate GPU utilization monitoring and auto-scaling based on load to optimize cost and performance.
-- **Serverless Inference Options**: Add support for serverless deployments using AWS Lambda or Google Cloud Functions.
-- **Enhanced API Integrations**: Extend integration with additional model APIs, including Cohere and Aleph Alpha, for a wider range of model options.
 - **Secure Data Handling**: Implement data encryption at rest and in transit, with options for integrating with virtual private cloud (VPC) configurations.
 - **Automated Logging and Monitoring**: Integrate with AWS CloudWatch and other monitoring tools for comprehensive real-time logging, alerting, and automated incident response.
 - **Nix Support for Reproducibility**: Enable consistent builds and simplified dependency management for improved cross-platform deployment and rollback capabilities.
+- **Serverless Inference Options**: Add support for serverless deployments using AWS Lambda or Google Cloud Functions.
+- **Cross-Cloud and API Flexibility**: Expand backend support to include Google Cloud Platform (GCP) and Microsoft Azure, and broaden model API integrations with options like Cohere, Stability AI, and Aleph Alpha for versatile deployment and model choices.
 
 ## 🤝 Contributing
 Coming soon.
