@@ -7,10 +7,10 @@ OpenAdapter is a deployment tool designed for model builders and users who need 
 This repository supports multiple cloud backends—initially with AWS and compatibility with frontier model APIs (e.g., Anthropic, OpenAI)—making it ideal for flexible, scalable deployment in diverse automation use cases and [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt)-agnostic implementations.
 
 ## ✨ Features
-- **Automated Cloud Deployment**: Rapidly deploy models on AWS EC2 or connect with Anthropic/OpenAI APIs (with integrated PII/PHI scrubbing) for remote inference.
+- **Automated Cloud Deployment**: Rapidly deploy models on AWS EC2, with plans to connect to Anthropic/OpenAI APIs (including integrated PII/PHI scrubbing).
 - **Configurable via `.env`**: Simplify setup with a customizable environment file.
 - **Cost-Efficient**: Deploy high-performance instances on demand; easily pause or stop resources to minimize costs.
-- **Compatibility with Dockerized Models or Frontier Model APIs**: OpenAdapter supports models like OmniParser and Set-of-Mark (SoM) as examples. It’s designed to plug into any project with a Dockerfile and can autogenerate one if necessary. It also enables seamless integration with non-containerized APIs like Anthropic’s and OpenAI’s.
+- **Compatibility with Dockerized Models and Planned API Integrations**: OpenAdapter supports models like OmniParser and Set-of-Mark (SoM) as examples. It’s designed to plug into any project with a Dockerfile and can autogenerate one if necessary. Seamless integration with non-containerized APIs like Anthropic and OpenAI is planned.
 
 Additional pattern references:
 - [SoM PR #19](https://github.com/microsoft/SoM/pull/19)
