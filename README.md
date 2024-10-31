@@ -1,15 +1,19 @@
+Adding compatibility with frontier model APIs, like those from Anthropic and OpenAI, could further extend OpenAdapter's utility in the following way:
+
+---
+
 # OpenAdapter
 Effortless Deployment and Integration for Advanced UI Action Models
 
 OpenAdapter is a deployment tool designed for model builders and users who need efficient, high-performance deployment of state-of-the-art screenshot parsing models. With OpenAdapter, you can quickly and easily set up these models on trusted hardware that you control, enabling automation with action and screenshot data on local or securely managed systems.
 
-This repository supports multiple cloud backends, initially with AWS and Hugging Face Inference API, making it ideal for flexible, scalable deployment in diverse automation use cases and [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt)-agnostic implementations.
+This repository supports multiple cloud backends, initially with AWS, Hugging Face Inference API, and compatibility with frontier model APIs (e.g., Anthropic, OpenAI), making it ideal for flexible, scalable deployment in diverse automation use cases and [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt)-agnostic implementations.
 
 ## Features
-- **Automated Cloud Deployment**: Rapidly deploy models on AWS EC2 or Hugging Face Inference API.
+- **Automated Cloud Deployment**: Rapidly deploy models on AWS EC2, Hugging Face Inference API, or connect with Anthropic/OpenAI APIs for remote inference.
 - **Configurable via `.env`**: Simplify setup with a customizable environment file.
 - **Cost-Efficient**: Deploy high-performance instances on demand; easily pause or stop resources to minimize costs.
-- **Compatibility with Any Dockerized Model**: While OpenAdapter supports models like OmniParser and Set-of-Mark (SoM) as examples, it is designed to plug into any project with a Dockerfile and can even autogenerate a Dockerfile if necessary.
+- **Compatibility with Any Dockerized Model or Frontier Model API**: While OpenAdapter supports models like OmniParser and Set-of-Mark (SoM) as examples, it is designed to plug into any project with a Dockerfile and can even autogenerate a Dockerfile if necessary. Additionally, it allows for integration with non-containerized APIs like Anthropic's and OpenAI's.
 
 For additional details on the pattern used, see:
 - [OmniParser PR #52](https://github.com/microsoft/OmniParser/pull/52)
@@ -19,7 +23,7 @@ For additional details on the pattern used, see:
 
 ### Prerequisites
 - Python 3.10+
-- [AWS account](https://aws.amazon.com/) or [Hugging Face account](https://huggingface.co/) with necessary permissions
+- [AWS account](https://aws.amazon.com/), [Hugging Face account](https://huggingface.co/), or API access with Anthropic or OpenAI
 - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `GITHUB_TOKEN` with repository access
 
 ### Installation
@@ -87,9 +91,10 @@ python deploy.py ssh
 - **Approximate Cost**: Running a model on an `AWS g4dn.xlarge` instance costs around $10/day with the default configuration (100GB storage). Costs will vary based on your AWS region and instance usage.
 
 ## Modular Cloud Backends
-OpenAdapter is designed with a modular backend structure to support multiple cloud providers. Current backends include:
+OpenAdapter is designed with a modular backend structure to support multiple cloud providers and frontier model APIs. Current backends include:
 - **AWS**: For deploying on EC2, with options for instance types, storage, and security settings.
 - **Hugging Face Inference API**: For deploying models directly on Hugging Face’s infrastructure, suitable for lighter workloads and models.
+- **Anthropic/OpenAI APIs**: Seamless integration with remote model inference on Anthropic and OpenAI’s systems, extending capabilities to hosted large language models.
 
 ## Integrations
 This project is intended for openadapt-agnostic deployments but also serves as a complementary tool for OpenAdaptAI's [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt) project. It can be customized to suit various automation, data processing, or model inference applications beyond OpenAdapt, providing a standalone, scalable solution for deploying SOTA models.
