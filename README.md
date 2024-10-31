@@ -4,13 +4,13 @@
 
 OpenAdapter is a deployment tool designed for model builders and users who need efficient, high-performance deployment of advanced screenshot parsing and action models. With OpenAdapter, you can quickly and easily set up these models on trusted hardware that you control, enabling automation with action and screenshot data on local or securely managed systems.
 
-This repository supports multiple cloud backends—initially with AWS, Hugging Face Inference API, and compatibility with frontier model APIs (e.g., Anthropic, OpenAI)—making it ideal for flexible, scalable deployment in diverse automation use cases and [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt)-agnostic implementations.
+This repository supports multiple cloud backends—initially with AWS and compatibility with frontier model APIs (e.g., Anthropic, OpenAI)—making it ideal for flexible, scalable deployment in diverse automation use cases and [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt)-agnostic implementations.
 
 ## ✨ Features
-- **Automated Cloud Deployment**: Rapidly deploy models on AWS EC2, Hugging Face Inference API, or connect with Anthropic/OpenAI APIs (with integrating PII/PHI scrubbing) for remote inference.
+- **Automated Cloud Deployment**: Rapidly deploy models on AWS EC2 or connect with Anthropic/OpenAI APIs (with integrated PII/PHI scrubbing) for remote inference.
 - **Configurable via `.env`**: Simplify setup with a customizable environment file.
 - **Cost-Efficient**: Deploy high-performance instances on demand; easily pause or stop resources to minimize costs.
-- **Compatibility with Dockerized Models or Frontier Model APIs**: OpenAdapter supports models like OmniParser and Set-of-Mark (SoM) as examples. It's designed to plug into any project with a Dockerfile and can even autogenerate one if necessary. It also enables seamless integration with non-containerized APIs like Anthropic's and OpenAI's.
+- **Compatibility with Dockerized Models or Frontier Model APIs**: OpenAdapter supports models like OmniParser and Set-of-Mark (SoM) as examples. It’s designed to plug into any project with a Dockerfile and can autogenerate one if necessary. It also enables seamless integration with non-containerized APIs like Anthropic’s and OpenAI’s.
 
 Additional pattern references:
 - [SoM PR #19](https://github.com/microsoft/SoM/pull/19)
@@ -34,16 +34,18 @@ Additional pattern references:
    ```plaintext
    AWS_ACCESS_KEY_ID=<your aws access key id>
    AWS_SECRET_ACCESS_KEY=<your aws secret access key>
-   AWS_REGION=<your aws region>
-   GITHUB_OWNER=<your github owner>        # e.g., OpenAdaptAI
-   GITHUB_REPO=<your github repo>          # e.g., OmniParser
+   AWS_REGION=us-east-1
+   GITHUB_OWNER=OpenAdaptAI
+   GITHUB_REPO=<your github repo>  # e.g., OmniParser
    GITHUB_TOKEN=<your github token>
    ```
-3. **Install dependencies:**
+3. **Install dependencies and activate the virtual environment**:
    ```bash
    python3 -m venv venv && source venv/bin/activate
    pip install -r deploy_requirements.txt
    ```
+
+OpenAdapter automates configuration parsing from the `.env` file.
 
 ## 💡 Usage Examples
 This tool provides straightforward commands for deploying and managing model instances.
@@ -63,7 +65,7 @@ Setup Instructions:
 
         AWS_ACCESS_KEY_ID=<AWS access key>
         AWS_SECRET_ACCESS_KEY=<AWS secret key>
-        AWS_REGION=<AWS region>
+        AWS_REGION=us-east-1
         GITHUB_OWNER=<GitHub org/user>
         GITHUB_REPO=<repo name>
         GITHUB_TOKEN=<GitHub token>
@@ -89,15 +91,7 @@ Usage Examples:
 from openadapter.server import OpenAdapterConfig, Deploy
 import fire
 
-config = OpenAdapterConfig(
-    AWS_ACCESS_KEY_ID="",
-    AWS_SECRET_ACCESS_KEY="",
-    AWS_REGION="us-west-2",
-    GITHUB_OWNER="OpenAdaptAI",
-    GITHUB_REPO="OmniParser",
-    GITHUB_TOKEN="",
-    PROJECT_NAME="OmniParser"
-)
+config = OpenAdapterConfig()
 
 class OmniParserDeploy(Deploy):
     def __init__(self):
@@ -130,25 +124,25 @@ Stop the instance entirely, freeing all associated resources:
 python deploy.py stop
 ```
 
-### Check Server Status
+### Check Server Status and IP
 To check the status of the EC2 instance and retrieve its public IP:
 ```bash
 python deploy.py status
 ```
 
 ### SSH Access
-SSH into the deployed instance for direct access:
+Use the output from the last line of `deploy.py start` to access the server:
 ```bash
-python deploy.py ssh
+2024-10-29 11:40:04.651 | INFO | __main__:start:663 - python client.py http://<server_ip>:7861
 ```
 
 ## 💲 Costs
-- **Approximate Cost**: Running a model on the default `AWS g4dn.xlarge` EC2 instance with 100GB storage costs around $10/day ($0.526/hr) in most AWS regions.  
-   _(Configuration uses `g4dn.xlarge` with T4 16GB GPU and Deep Learning AMI GPU PyTorch 2.0.1 on Ubuntu 20.04, as defined in `deploy.config.AWS_EC2_INSTANCE_TYPE`)_.
+- **Approximate Cost**: Running a model on the default `AWS g4dn.xlarge` EC2 instance in `us-east-1` with 100GB storage costs around $10/day ($0.526/hr).
 
 ## Modular Cloud Backends
 OpenAdapter is designed with a modular backend structure to support multiple cloud providers and frontier model APIs. Current backends include:
 - **AWS**: For deploying on EC2, with options for instance types, storage, and security settings.
+
 Planned backends include:
 - **Hugging Face Inference API**: For deploying models directly on Hugging Face’s infrastructure, suitable for lighter workloads and models.
 - **Anthropic/OpenAI APIs**: Seamless integration with remote model inference on Anthropic and OpenAI’s systems, extending capabilities to hosted large language models.
@@ -170,4 +164,4 @@ OpenAdapter is intended for OpenAdapt-agnostic deployments but also serves as a 
 Coming soon.
 
 ## License
-OpenAdapter is licensed under the MIT License. See [LICENSE](./LICENSE) for more details.
+OpenAdapter is licensed under the MIT License.
