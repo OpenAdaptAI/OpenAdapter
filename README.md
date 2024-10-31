@@ -16,8 +16,6 @@ Additional pattern references:
 - [OmniParser PR #52](https://github.com/microsoft/OmniParser/pull/52)
 - [SoM PR #19](https://github.com/microsoft/SoM/pull/19)
 
----
-
 ## ⚙️ Setup
 
 ### Prerequisites
@@ -47,10 +45,67 @@ Additional pattern references:
    pip install -r deploy_requirements.txt
    ```
 
----
-
 ## 💡 Usage Examples
 This tool provides straightforward commands for deploying and managing model instances.
+
+### Deployment Script Example
+
+You can simplify deployments of models like OmniParser by leveraging OpenAdapter's `Deploy` interface. Here’s an example script (`deploy.py`) for OmniParser that uses OpenAdapter’s configuration setup:
+
+```python
+"""
+OmniParser Deployment Script using OpenAdapter
+
+This script automates deployment, setup, and management of the OmniParser server on AWS.
+
+Setup Instructions:
+    1. Create a `.env` file in the same directory with these keys:
+
+        AWS_ACCESS_KEY_ID=<AWS access key>
+        AWS_SECRET_ACCESS_KEY=<AWS secret key>
+        AWS_REGION=<AWS region>
+        GITHUB_OWNER=<GitHub org/user>
+        GITHUB_REPO=<repo name>
+        GITHUB_TOKEN=<GitHub token>
+        PROJECT_NAME=OmniParser
+
+    2. Install dependencies:
+        pip install -r deploy_requirements.txt
+
+Usage Examples:
+    Start server:
+        python deploy.py start
+
+    Stop server and clean up resources:
+        python deploy.py stop
+
+    Check server status:
+        python deploy.py status
+
+    SSH into server:
+        python deploy.py ssh
+"""
+
+from openadapter.server import OpenAdapterConfig, Deploy
+import fire
+
+config = OpenAdapterConfig(
+    AWS_ACCESS_KEY_ID="",
+    AWS_SECRET_ACCESS_KEY="",
+    AWS_REGION="us-west-2",
+    GITHUB_OWNER="OpenAdaptAI",
+    GITHUB_REPO="OmniParser",
+    GITHUB_TOKEN="",
+    PROJECT_NAME="OmniParser"
+)
+
+class OmniParserDeploy(Deploy):
+    def __init__(self):
+        super().__init__(config=config)
+
+if __name__ == "__main__":
+    fire.Fire(OmniParserDeploy)
+```
 
 ### Start the Deployment
 To deploy a model (such as OmniParser or Set-of-Mark) on an AWS EC2 instance with GPU and 100GB storage (default), run:
@@ -87,26 +142,19 @@ SSH into the deployed instance for direct access:
 python deploy.py ssh
 ```
 
----
-
 ## 💲 Costs
-- **Approximate Cost**: Running a model on the default `AWS g4dn.xlarge` instance with 100GB storage costs around $10/day ($0.526/hr) in most AWS regions.  
+- **Approximate Cost**: Running a model on the default `AWS g4dn.xlarge` EC2 instance with 100GB storage costs around $10/day ($0.526/hr) in most AWS regions.  
    _(Configuration uses `g4dn.xlarge` with T4 16GB GPU and Deep Learning AMI GPU PyTorch 2.0.1 on Ubuntu 20.04, as defined in `deploy.config.AWS_EC2_INSTANCE_TYPE`)_.
-
----
 
 ## Modular Cloud Backends
 OpenAdapter is designed with a modular backend structure to support multiple cloud providers and frontier model APIs. Current backends include:
 - **AWS**: For deploying on EC2, with options for instance types, storage, and security settings.
+Planned backends include:
 - **Hugging Face Inference API**: For deploying models directly on Hugging Face’s infrastructure, suitable for lighter workloads and models.
 - **Anthropic/OpenAI APIs**: Seamless integration with remote model inference on Anthropic and OpenAI’s systems, extending capabilities to hosted large language models.
 
----
-
 ## Integrations
-OpenAdapter is intended for OpenAdapt-agnostic deployments but also serves as a complementary tool for OpenAdaptAI's [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt) project. It can be customized to suit various automation, data processing, or model inference applications beyond OpenAdapt, providing a standalone, scalable solution for deploying state-of-the-art models.
-
----
+OpenAdapter is intended for OpenAdapt-agnostic deployments but also serves as a complementary tool for the [OpenAdapt](https://github.com/OpenAdaptAI/OpenAdapt) generative process automation project. It can be customized to suit various automation, data processing, or model inference applications beyond OpenAdapt, providing a standalone, scalable solution for deploying state-of-the-art models.
 
 ## 🛠️ Roadmap
 - **Automation with AWS CDK**: Integrate AWS Cloud Development Kit (CDK) for Infrastructure as Code, simplifying deployment workflows and enabling reproducible environments with minimal setup.
@@ -118,8 +166,6 @@ OpenAdapter is intended for OpenAdapt-agnostic deployments but also serves as a 
 - **Secure Data Handling**: Implement data encryption at rest and in transit, with options for integrating with virtual private cloud (VPC) configurations.
 - **Automated Logging and Monitoring**: Integrate with AWS CloudWatch and other monitoring tools for comprehensive real-time logging, alerting, and automated incident response.
 - **Nix Support for Reproducibility**: Enable consistent builds and simplified dependency management for improved cross-platform deployment and rollback capabilities.
-
----
 
 ## 🤝 Contributing
 Coming soon.
