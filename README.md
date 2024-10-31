@@ -11,6 +11,7 @@ This repository supports multiple cloud backends—initially with AWS and compat
 - **Configurable via `.env`**: Simplify setup with a customizable environment file.
 - **Cost-Efficient**: Deploy high-performance instances on demand; easily pause or stop resources to minimize costs.
 - **Compatibility with Dockerized Models and Planned API Integrations**: OpenAdapter supports models like OmniParser and Set-of-Mark (SoM) as examples. It’s designed to plug into any project with a Dockerfile and can autogenerate one if necessary. Seamless integration with non-containerized APIs like Anthropic and OpenAI is planned.
+- **Automated CI/CD with GitHub Actions**: Continuous integration and deployment are managed through GitHub Actions workflows, ensuring rapid and consistent updates to deployments.
 
 Additional pattern references:
 - [SoM PR #19](https://github.com/microsoft/SoM/pull/19)
@@ -159,6 +160,8 @@ OpenAdapter is intended for OpenAdapt-agnostic deployments but also serves as a 
 - **Nix Support for Reproducibility**: Enable consistent builds and simplified dependency management for improved cross-platform deployment and rollback capabilities.
 - **Serverless Inference Options**: Add support for serverless deployments using AWS Lambda or Google Cloud Functions.
 - **Cross-Cloud and API Flexibility**: Expand backend support to include Google Cloud Platform (GCP) and Microsoft Azure, and broaden model API integrations with options like Cohere, Stability AI, and Aleph Alpha for versatile deployment and model choices.
+- **GitHub Actions for Continuous Deployment**: Enhance the GitHub Actions setup for automated testing and multi-environment deployment, including advanced job conditions for fail-safe production releases.
+- **Enhanced CI/CD Integrations**: Planned integration with CI/CD platforms like GitLab CI and CircleCI for extended deployment scenarios and options for more advanced job configurations.
 
 ## 🤝 Contributing
 Coming soon.
